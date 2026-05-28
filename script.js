@@ -4,6 +4,19 @@
  * статьи, прогресс-бар, кнопка наверх, scroll reveal
  */
 
+// ========== МИГРАЦИЯ ВЕРСИИ (сброс старого кэша) ==========
+(function() {
+    const CURRENT_VERSION = 2;
+    const savedVersion = parseInt(localStorage.getItem('mVersion'), 10);
+    if (!savedVersion || savedVersion < CURRENT_VERSION) {
+        // При обновлении сайта — чистим старые данные
+        localStorage.removeItem('mArticles');
+        localStorage.removeItem('mTheme');
+        // Не сбрасываем mAdminMode — пользователь не должен терять доступ
+        localStorage.setItem('mVersion', String(CURRENT_VERSION));
+    }
+})();
+
 // ========== ТРОТТЛ ==========
 function throttle(fn, limit) {
     let last = 0;
@@ -1085,6 +1098,12 @@ loadArticles();
 renderArticles();
 renderArticleFilters();
 if (adminMode) updateAdminUI();
+
+// Блокируем PWA-установку (браузерный "подтвердите действие")
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
 
 // Сервис-воркер: обновляемся без спроса
 if ('serviceWorker' in navigator) {
