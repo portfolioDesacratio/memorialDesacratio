@@ -27,26 +27,26 @@ html {
     --shadow: 0 12px 40px rgba(0,0,0,0.5);
     --stat-color: #fff;
     --section-alt: rgba(255,255,255,0.02);
-    --tag-bg: rgba(16,185,129,0.15);
-    --accent: #10b981;
-    --accent2: #059669;
+    --tag-bg: rgba(245,158,11,0.15);
+    --accent: #f59e0b;
+    --accent2: #d97706;
     --modal-bg: rgba(0,0,0,0.85);
     --modal-content: #12121a;
     --modal-border: rgba(255,255,255,0.06);
     --code-bg: #1a1a24;
-    --hero-glow: rgba(16,185,129,0.1);
+    --hero-glow: rgba(245,158,11,0.1);
     --footer-text: #555;
-    --timeline-line: rgba(16,185,129,0.3);
-    --timeline-dot: #10b981;
+    --timeline-line: rgba(245,158,11,0.3);
+    --timeline-dot: #f59e0b;
     --btn-outline-border: rgba(255,255,255,0.15);
     --btn-outline-color: #ccc;
-    --badge-bg: rgba(16,185,129,0.15);
-    --badge-color: #10b981;
-    --tag-color: #10b981;
+    --badge-bg: rgba(245,158,11,0.15);
+    --badge-color: #f59e0b;
+    --tag-color: #f59e0b;
     --particle-color: 255,255,255;
     --scrollbar-bg: #0a0a0f;
     --scrollbar-thumb: #333;
-    --selection: rgba(16,185,129,0.4);
+    --selection: rgba(245,158,11,0.4);
 }
 
 body.light-mode {
@@ -65,26 +65,26 @@ body.light-mode {
     --shadow: 0 12px 40px rgba(0,0,0,0.08);
     --stat-color: #1a1a2e;
     --section-alt: rgba(0,0,0,0.02);
-    --tag-bg: rgba(16,185,129,0.08);
-    --accent: #10b981;
-    --accent2: #059669;
+    --tag-bg: rgba(245,158,11,0.08);
+    --accent: #f59e0b;
+    --accent2: #d97706;
     --modal-bg: rgba(0,0,0,0.5);
     --modal-content: #ffffff;
     --modal-border: rgba(0,0,0,0.08);
     --code-bg: #f0f0f8;
-    --hero-glow: rgba(16,185,129,0.05);
+    --hero-glow: rgba(245,158,11,0.05);
     --footer-text: #999;
-    --timeline-line: rgba(16,185,129,0.3);
-    --timeline-dot: #10b981;
+    --timeline-line: rgba(245,158,11,0.3);
+    --timeline-dot: #f59e0b;
     --btn-outline-border: rgba(0,0,0,0.15);
     --btn-outline-color: #555;
-    --badge-bg: rgba(16,185,129,0.1);
-    --badge-color: #10b981;
-    --tag-color: #10b981;
+    --badge-bg: rgba(245,158,11,0.1);
+    --badge-color: #f59e0b;
+    --tag-color: #f59e0b;
     --particle-color: 0,0,0;
     --scrollbar-bg: #f0f0f8;
     --scrollbar-thumb: #ccc;
-    --selection: rgba(16,185,129,0.2);
+    --selection: rgba(245,158,11,0.2);
 }
 
 /* ===== ФОНЫ ДЛЯ РАЗНЫХ УСТРОЙСТВ ===== */
