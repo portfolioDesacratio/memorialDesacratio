@@ -161,44 +161,58 @@ function openSubmodule(mod, idx, searchQuery) {
 // Подсветка найденного слова в HTML-контенте
 function highlightInContent(container, query) {
     if (!query || query.length === 0) return;
-    // Экранируем спецсимволы для RegExp
     const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(escaped, 'gi');
-
-    // Рекурсивно обходим все узлы, исключая SCRIPT/STYLE/CODE/PRE
-    function walk(el) {
-        if (el.nodeType === 3) { // текстовый узел
-            const content = el.textContent;
-            if (!content || !regex.test(content)) return;
-            // Сбрасываем regex.lastIndex после test()
-            regex.lastIndex = 0;
-
-            const frag = document.createDocumentFragment();
-            let lastIdx = 0;
-            let match;
-            while ((match = regex.exec(content)) !== null) {
-                const before = content.substring(lastIdx, match.index);
-                if (before) frag.appendChild(document.createTextNode(before));
-                const span = document.createElement('span');
-                span.className = 'search-highlight';
-                span.textContent = match[0];
-                frag.appendChild(span);
-                lastIdx = match.index + match[0].length;
+    // Проходим по всем элементам внутри контейнера (кроме SCRIPT/STYLE/CODE/PRE)
+    const iter = document.createNodeIterator(container, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node) {
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_ACCEPT;
+            const tag = parent.tagName;
+            if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE') {
+                return NodeFilter.FILTER_REJECT;
             }
-            const after = content.substring(lastIdx);
-            if (after) frag.appendChild(document.createTextNode(after));
-            el.parentNode.replaceChild(frag, el);
-        } else if (el.nodeType === 1) { // элемент
-            const tag = el.tagName;
-            if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE') return;
-            // Используем замороженный список childNodes, чтобы избежать проблем с живой коллекцией
-            Array.from(el.childNodes).forEach(child => walk(child));
+            return NodeFilter.FILTER_ACCEPT;
         }
+    });
+
+    const toReplace = [];
+    let node;
+    while ((node = iter.nextNode())) {
+        const text = node.textContent;
+        if (!text) continue;
+        // Ищем ВСЕ совпадения в этом текстовом узле
+        const regex = new RegExp(escaped, 'gi');
+        const parts = [];
+        let lastIdx = 0;
+        let match;
+        let hasMatch = false;
+        while ((match = regex.exec(text)) !== null) {
+            hasMatch = true;
+            if (match.index > lastIdx) {
+                parts.push(document.createTextNode(text.substring(lastIdx, match.index)));
+            }
+            const span = document.createElement('span');
+            span.className = 'search-highlight';
+            span.textContent = match[0];
+            parts.push(span);
+            lastIdx = match.index + match[0].length;
+        }
+        if (!hasMatch) continue;
+        if (lastIdx < text.length) {
+            parts.push(document.createTextNode(text.substring(lastIdx)));
+        }
+        toReplace.push({ node, parts });
     }
 
-    walk(container);
+    // Заменяем с конца, чтобы не сбивались индексы
+    for (let i = toReplace.length - 1; i >= 0; i--) {
+        const { node, parts } = toReplace[i];
+        const frag = document.createDocumentFragment();
+        parts.forEach(p => frag.appendChild(p));
+        node.parentNode.replaceChild(frag, node);
+    }
 
-    // Если есть выделения — скроллим к первому
+    // Скроллим к первому выделению
     const first = container.querySelector('.search-highlight');
     if (first) {
         setTimeout(() => {

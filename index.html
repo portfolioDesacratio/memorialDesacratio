@@ -54,6 +54,9 @@
     <link rel="preload" href="assets/images/bg-dark-desktop.webp" as="image" media="(min-width: 1024px) and (prefers-color-scheme: dark)" type="image/webp">
     <link rel="preload" href="assets/images/bg-light-desktop.webp" as="image" media="(min-width: 1024px) and (prefers-color-scheme: light)" type="image/webp">
 
+    <!-- Отключаем PWA-установку ДО загрузки остальных скриптов -->
+    <script>window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();});</script>
+
     <title>CyberDesacratio | OSINT & Cyber Security</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -394,9 +397,6 @@
     <script src="data.js"></script>
     <script src="script.js" defer></script>
     <script>
-    // Отключаем PWA-установку (чтоб не было диалогов браузера)
-    window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); });
-    // SW регистрируем тихо
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(function(){});
     }
