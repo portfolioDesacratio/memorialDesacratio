@@ -1,3 +1,16 @@
-// CyberDesacratio — заглушка (сервис-воркер отключён)
-// Всегда отдаём свежие файлы с сервера.
-// Предыдущая версия кэшировала старые данные — это было причиной проблем с обновлением.
+// CyberDesacratio — сервис-воркер заглушка
+// Мгновенно активируемся и не показываем никаких диалогов.
+const CACHE = 'cyberdesacratio-final';
+self.addEventListener('install', () => {
+    self.skipWaiting();
+});
+self.addEventListener('activate', (e) => {
+    e.waitUntil((async () => {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+        await self.clients.claim();
+    })());
+});
+self.addEventListener('fetch', (e) => {
+    e.respondWith(fetch(e.request).catch(() => new Response('', {status: 408})));
+});
