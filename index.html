@@ -11,6 +11,15 @@
     <meta name="author" content="CyberDesacratio">
     <meta name="robots" content="index, follow">
 
+    <!-- Убиваем PWA/SW до загрузки всего остального -->
+    <script>
+        window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); e.stopPropagation(); });
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(r) { r.forEach(function(r2) { r2.unregister(); }); });
+        }
+        if ('caches' in window) { caches.keys().then(function(k) { k.forEach(function(k2) { caches.delete(k2); }); }); }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
