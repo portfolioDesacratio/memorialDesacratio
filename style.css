@@ -18,8 +18,8 @@ html {
     --bg: rgba(10, 10, 15, 0.88);
     --bg-solid: #0a0a0f;
     --text: #e0e0e0;
-    --text-muted: #999;
-    --text-dim: #777;
+    --text-muted: #bbb;
+    --text-dim: #999;
     --border: rgba(255,255,255,0.06);
     --border-light: rgba(255,255,255,0.15);
     --card-bg: rgba(18, 18, 26, 0.75);
@@ -62,7 +62,7 @@ body.light-mode {
     --bg: rgba(240, 240, 248, 0.92);
     --bg-solid: #f0f0f8;
     --text: #1a1a2e;
-    --text-muted: #555;
+    --text-muted: #666;
     --text-dim: #888;
     --border: rgba(0,0,0,0.08);
     --border-light: rgba(0,0,0,0.12);
@@ -1314,28 +1314,53 @@ body.light-mode #searchInput:focus {
     padding: 80px 0;
     background: var(--section-alt);
 }
-.articles-toolbar {
+.articles .section-subtitle {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Админ-панель */
+.admin-panel {
+    margin-bottom: 28px;
+    animation: fadeIn 0.3s ease;
+}
+.admin-panel-inner {
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 24px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px dashed var(--accent);
+    border-radius: 16px;
+}
+.admin-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
 }
 .articles-upload {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
     cursor: pointer;
 }
 .upload-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 28px;
+    padding: 12px 24px;
     background: var(--accent-gradient, linear-gradient(135deg, #8b5cf6, #6d28d9));
     color: #fff;
     border: none;
-    border-radius: 14px;
-    font-size: 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
@@ -1350,57 +1375,76 @@ body.light-mode #searchInput:focus {
     transform: translateY(0) scale(0.98);
 }
 .upload-hint {
-    font-size: 0.8rem;
-    color: var(--text-dim);
+    font-size: 0.78rem;
+    color: var(--text-muted);
 }
+
+/* Сетка статей */
 .articles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
 }
 .article-card {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
+    border-radius: 16px;
+    padding: 20px 22px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     position: relative;
+    overflow: hidden;
+}
+.article-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
 }
 .article-card:hover {
-    border-color: var(--border-light);
+    border-color: var(--accent);
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+.article-card:hover::before {
+    opacity: 0.6;
 }
 .article-card .article-type {
     display: inline-block;
     padding: 2px 10px;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    border-radius: 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
     font-family: 'JetBrains Mono', monospace;
     margin-bottom: 10px;
+    letter-spacing: 0.5px;
     background: var(--tag-bg);
     color: var(--accent);
 }
 .article-card h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     line-height: 1.4;
+    color: var(--text);
 }
 .article-card .article-date {
-    font-size: 0.78rem;
-    color: var(--text-dim);
+    font-size: 0.75rem;
+    color: var(--text-muted);
     margin-bottom: 10px;
 }
 .article-card .article-preview {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.5;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -1408,50 +1452,49 @@ body.light-mode #searchInput:focus {
 }
 .article-card .article-delete {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
     border: none;
-    background: rgba(255,0,0,0.1);
+    background: rgba(239,68,68,0.12);
     color: #ef4444;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s ease, background 0.2s ease;
-}
-.article-card:hover .article-delete {
-    opacity: 1;
+    transition: background 0.2s ease;
 }
 .article-card .article-delete:hover {
-    background: rgba(239,68,68,0.2);
+    background: rgba(239,68,68,0.25);
+}
+.article-card .article-delete.visible {
+    display: flex;
 }
 
 .articles-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     padding: 60px 20px;
     text-align: center;
-    color: var(--text-muted);
 }
 .articles-empty .empty-icon {
-    font-size: 3rem;
-    opacity: 0.5;
-    margin-bottom: 8px;
+    font-size: 3.5rem;
+    opacity: 0.6;
+    margin-bottom: 6px;
 }
 .articles-empty p {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--text-dim);
+    color: var(--text);
 }
 .articles-empty span {
     font-size: 0.9rem;
+    color: var(--text-muted);
 }
 .articles-empty.hidden {
     display: none;
@@ -1602,24 +1645,6 @@ body.light-mode #searchInput:focus {
     transform: translateY(0) scale(0.95);
 }
 
-/* ========== SCROLL REVEAL ========== */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
-
 /* ========== КНОПКА СТАТЬИ В HERO ========== */
 .btn-articles {
     display: inline-flex;
@@ -1708,6 +1733,7 @@ body.light-mode #searchInput:focus {
     
     .articles-grid { grid-template-columns: 1fr; }
     .articles { padding: 60px 0; }
+    .admin-panel-inner { flex-direction: column; text-align: center; gap: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -1728,8 +1754,9 @@ body.light-mode #searchInput:focus {
     .contact { padding: 60px 0; }
     .articles { padding: 60px 0; }
     .articles-grid { grid-template-columns: 1fr; }
-    .article-card { padding: 18px; }
-    .upload-btn { padding: 12px 24px; font-size: 0.9rem; }
+    .article-card { padding: 16px; }
+    .upload-btn { padding: 10px 20px; font-size: 0.85rem; }
+    .admin-panel-inner { padding: 16px; gap: 10px; }
 }
 
 /* iPhone X+ notch / Dynamic Island */

@@ -401,6 +401,8 @@ function renderArticles() {
     articlesGrid.innerHTML = '';
     if (articles.length === 0) {
         articlesEmpty.classList.remove('hidden');
+        // Обновляем админ UI
+        if (typeof updateAdminUI === 'function') updateAdminUI();
         return;
     }
     articlesEmpty.classList.add('hidden');
@@ -409,7 +411,7 @@ function renderArticles() {
     sorted.forEach((art, displayIdx) => {
         const realIdx = articles.length - 1 - displayIdx;
         const card = document.createElement('div');
-        card.className = 'article-card reveal';
+        card.className = 'article-card';
         const preview = art.content.replace(/<[^>]*>/g, '').substring(0, 150);
         card.innerHTML = `
             <span class="article-type">${art.type}</span>
@@ -430,6 +432,7 @@ function renderArticles() {
         });
         articlesGrid.appendChild(card);
     });
+    if (typeof updateAdminUI === 'function') updateAdminUI();
 }
 
 function escHtml(str) {
@@ -814,28 +817,29 @@ if (backToTop) {
     });
 }
 
-// ========== SCROLL REVEAL ==========
-(function() {
-    const revealElements = document.querySelectorAll('.reveal:not(.article-card .reveal)');
-    if (!revealElements.length) return;
+// ========== АДМИН-ПАНЕЛЬ (двойной клик по заголовку статей) ==========
+const articlesTitle = document.getElementById('articlesTitle');
+const adminPanel = document.getElementById('adminPanel');
+let adminMode = localStorage.getItem('mAdminMode') === 'true';
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const delay = Array.from(revealElements).indexOf(entry.target) % 12 * 40;
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, delay);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+function updateAdminUI() {
+    if (!adminPanel) return;
+    adminPanel.style.display = adminMode ? 'block' : 'none';
+    document.querySelectorAll('.article-card .article-delete').forEach(btn => {
+        btn.classList.toggle('visible', adminMode);
     });
+}
 
-    revealElements.forEach(el => observer.observe(el));
-})();
+if (articlesTitle) {
+    articlesTitle.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        adminMode = !adminMode;
+        localStorage.setItem('mAdminMode', adminMode);
+        updateAdminUI();
+    });
+}
+
+if (adminMode) updateAdminUI();
 
 // ====================================================================
 // ЗАПУСК
@@ -845,11 +849,6 @@ buildFilter();
 buildSearchIndex();
 loadArticles();
 renderArticles();
-
-// Добавить reveal классы основным секциям динамически
-document.querySelectorAll('section').forEach(s => {
-    if (!s.classList.contains('reveal')) s.classList.add('reveal');
-});
 
 console.log('%c CyberDesacratio ', 'background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 18px; padding: 10px 20px; border-radius: 8px; font-weight: bold;');
 console.log('%c In Cyberspace We Trust ', 'color: #667eea; font-size: 13px;');
