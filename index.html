@@ -394,8 +394,11 @@
     <script src="data.js"></script>
     <script src="script.js" defer></script>
     <script>
+    // Отключаем PWA-установку (чтоб не было диалогов браузера)
+    window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); });
+    // SW регистрируем тихо
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js').catch(function(){});
     }
     </script>
 </body>

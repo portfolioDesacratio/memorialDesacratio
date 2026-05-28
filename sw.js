@@ -1,30 +1,9 @@
-// CyberDesacratio — Service Worker
-const CACHE = 'cyberdesacratio-v1';
-const STATIC_ASSETS = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/data.js',
-    '/manifest.json',
-    '/404.html',
-    '/favicon.ico',
-    '/assets/icons/favicon.svg',
-    '/assets/icons/favicon-16x16.png',
-    '/assets/icons/favicon-32x32.png',
-    '/assets/icons/apple-touch-icon.png',
-    '/assets/icons/android-chrome-192x192.png',
-    '/assets/icons/android-chrome-512x512.png',
-];
+// CyberDesacratio — Service Worker (тихий режим)
+const CACHE = 'cyberdesacratio-v2';
 
-// При установке — кешируем статику
+// При установке — только critical, без массового кеширования
 self.addEventListener('install', (event) => {
     self.skipWaiting();
-    event.waitUntil(
-        caches.open(CACHE).then((cache) => {
-            return cache.addAll(STATIC_ASSETS);
-        })
-    );
 });
 
 // При активации — чистим старые кеши
@@ -39,19 +18,28 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Стратегия: Network First с fallback на кеш
+// Стратегия: Cache First для статики, Network First для остального
 self.addEventListener('fetch', (event) => {
-    // Для шрифтов и фонов — Cache First (они редко меняются)
+    const { request } = event;
+    const url = new URL(request.url);
+
+    // Только наш origin
+    if (url.origin !== location.origin) return;
+
+    // Для статики — Cache First
     if (
-        event.request.url.includes('fonts.googleapis.com') ||
-        event.request.url.includes('fonts.gstatic.com') ||
-        event.request.url.includes('assets/images/')
+        request.destination === 'style' ||
+        request.destination === 'script' ||
+        request.destination === 'font' ||
+        request.destination === 'image' ||
+        url.pathname === '/' ||
+        url.pathname === '/index.html'
     ) {
         event.respondWith(
-            caches.match(event.request).then((cached) => {
-                return cached || fetch(event.request).then((response) => {
+            caches.match(request).then((cached) => {
+                return cached || fetch(request).then((response) => {
                     const clone = response.clone();
-                    caches.open(CACHE).then((cache) => cache.put(event.request, clone));
+                    caches.open(CACHE).then((cache) => cache.put(request, clone));
                     return response;
                 });
             })
@@ -59,22 +47,14 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Для всего остального — Network First
+    // Для остального — Network First с fallback
     event.respondWith(
-        fetch(event.request)
+        fetch(request)
             .then((response) => {
                 const clone = response.clone();
-                caches.open(CACHE).then((cache) => cache.put(event.request, clone));
+                caches.open(CACHE).then((cache) => cache.put(request, clone));
                 return response;
             })
-            .catch(() => {
-                return caches.match(event.request).then((cached) => {
-                    // Если упала сеть и это навигация — отдаём корень (SPA-like)
-                    if (!cached && event.request.mode === 'navigate') {
-                        return caches.match('/');
-                    }
-                    return cached;
-                });
-            })
+            .catch(() => caches.match(request))
     );
 });
