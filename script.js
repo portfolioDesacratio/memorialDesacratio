@@ -149,6 +149,10 @@ function openSubmodule(mod, idx, searchQuery) {
         highlightInContent(modalBody, searchQuery);
     }
 
+    // Показываем модал (если вызвано напрямую из поиска)
+    moduleModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
     // Scroll to top and reset progress
     moduleModal.querySelector('.modal').scrollTop = 0;
     resetProgress();
