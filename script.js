@@ -6,7 +6,7 @@
 
 // ========== МИГРАЦИЯ ВЕРСИИ (дубль — на всякий случай) ==========
 (function() {
-    const CURRENT_VERSION = 6;
+    const CURRENT_VERSION = 7;
     const savedVersion = parseInt(localStorage.getItem('mVersion'), 10);
     if (!savedVersion || savedVersion < CURRENT_VERSION) {
         localStorage.removeItem('mArticles');
@@ -463,32 +463,24 @@ async function loadArticles() {
         }
     } catch(e) { articles = []; }
 
-    // ВСЕГДА перезагружаем статью о DE (свежая версия)
-    try {
-        const resp = await fetch('article-content.html?v=7&t=' + Date.now());
-        if (resp.ok) {
-            const html = await resp.text();
-            const hasImages = html.indexOf('<img') >= 0;
-            console.log('[DE] article fetched, has images:', hasImages, 'length:', html.length);
-            // Удаляем старую версию статьи, если есть
-            const idx = articles.findIndex(a => a.title === 'Графические окружения. DE');
-            if (idx >= 0) articles.splice(idx, 1);
-            articles.push({
-                title: 'Графические окружения. DE',
-                category: 'Linux',
-                type: 'HTML',
-                date: 'мая 2026',
-                content: html
-            });
-            // Не сохраняем в localStorage — всегда свежая
-        } else {
-            console.warn('[DE] fetch failed:', resp.status);
-        }
-    } catch(e) {
-        console.warn('[DE] fetch error:', e);
-        if (!articles.some(a => a.title === 'Графические окружения. DE')) {
-            console.warn('Не удалось загрузить article-content.html');
-        }
+    // Статья DE встроена в <template id="deArticleTemplate"> в index.html
+    const template = document.getElementById('deArticleTemplate');
+    if (template) {
+        const html = template.innerHTML;
+        const hasImages = html.indexOf('<img') >= 0;
+        console.log('[DE] from template, has images:', hasImages, 'length:', html.length);
+        // Удаляем старую версию, если есть
+        const idx = articles.findIndex(a => a.title === 'Графические окружения. DE');
+        if (idx >= 0) articles.splice(idx, 1);
+        articles.push({
+            title: 'Графические окружения. DE',
+            category: 'Linux',
+            type: 'HTML',
+            date: 'мая 2026',
+            content: html
+        });
+    } else {
+        console.warn('[DE] template not found');
     }
 }
 

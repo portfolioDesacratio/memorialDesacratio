@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- ⚡ ЯДЕРНЫЙ СБРОС: убить SW, очистить кэш, сбросить localStorage -->
-    <script>
-    (function(){
-        // 1. Убить все Service Workers
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.getRegistrations().then(function(regs) {
-                regs.forEach(function(reg) { reg.unregister(); });
-            });
-        }
-        // 2. Очистить все CacheStorage
-        if (window.caches) {
-            caches.keys().then(function(names) {
-                names.forEach(function(name) { caches.delete(name); });
-            });
-        }
-        // 3. Сбросить localStorage сайта
-        localStorage.removeItem('mArticles');
-        localStorage.removeItem('mVersion');
-        localStorage.removeItem('mTheme');
-        localStorage.removeItem('mStaticArticles');
-        localStorage.removeItem('mFilter');
-        // 4. Установить новую версию
-        localStorage.setItem('mVersion', '5');
-    })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)">
@@ -392,13 +367,804 @@
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
-    <script src="data.js?v=7"></script>
-    <script src="script.js?v=7"></script>
-    <script>
-    // Регистрируем НОВЫЙ SW — заменит старый, очистит кэш
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-    }
-    </script>
+    <!-- Статья DE встроена в template — не зависит от fetch/SW/кэша -->
+    <template id="deArticleTemplate">
+<div class="de-intro">
+  <p>Графическое окружение (Desktop Environment, DE) — это набор взаимосвязанных компонентов, которые предоставляют пользователю графический интерфейс для взаимодействия с операционной системой. В мире Linux существует множество DE, каждое из которых имеет свои особенности, философию и целевую аудиторию. В этой статье мы рассмотрим 14 наиболее известных графических окружений.</p>
+</div>
+
+<div class="de-toc">
+  <h2 class="de-section-title">Содержание</h2>
+  <ol>
+    <li>GNOME</li>
+    <li>KDE Plasma</li>
+    <li>Xfce</li>
+    <li>LXDE</li>
+    <li>LXQt</li>
+    <li>MATE</li>
+    <li>Cinnamon</li>
+    <li>Budgie</li>
+    <li>Deepin (DDE)</li>
+    <li>Enlightenment</li>
+    <li>Pantheon</li>
+    <li>Sugar</li>
+    <li>Trinity (TDE)</li>
+    <li>CDE</li>
+  </ol>
+</div>
+
+<h2 class="de-section-title">GNOME</h2>
+<div class="de-subsection-title">📌 GNOME</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1999 (GNOME 1); 2011 (GNOME 3); 2021 (GNOME 40)</dd>
+  <dt>Поддерживаемые ОС:</dt><dd>Linux, BSD, Solaris</dd>
+  <dt>Последняя версия:</dt><dd>48</dd>
+  <dt>Используют:</dt><dd>Ubuntu (основная редакция), Debian, Arch Linux, openSUSE, RHEL, CentOS Stream</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 4)</dd>
+  <dt>Организация:</dt><dd>GNOME Foundation</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://www.gnome.org">https://www.gnome.org</a></dd>
+</dl>
+<p>GNOME (GNU Network Object Model Environment) — один из самых популярных и влиятельных графических окружений в мире Linux. Разрабатывается под эгидой GNOME Foundation с 1997 года. GNOME известен своим минималистичным и современным дизайном, ориентированным на простоту и удобство использования. С версии 40 (2021 год) GNOME претерпел значительные изменения в интерфейсе, перейдя к горизонтальной компоновке рабочих пространств и обновлённому стилю.</p>
+<h4>Философия</h4>
+<p>GNOME придерживается философии «меньше — значит больше». Интерфейс спроектирован так, чтобы не отвлекать пользователя от работы. Вместо традиционного рабочего стола с иконками, GNOME предлагает уникальный подход с Обзором (Activities Overview), где можно переключаться между окнами, рабочими пространствами и приложениями. GNOME Human Interface Guidelines (HIG) задают строгие стандарты для разработчиков приложений, обеспечивая единообразие интерфейса.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Обзор (Activities Overview) — центральный элемент навигации с поиском и переключением окон</li>
+  <li>Динамические рабочие пространства (Workspaces) с автоматическим созданием/удалением</li>
+  <li>GNOME Shell — современная оболочка на основе Clutter и Mutter</li>
+  <li>Расширения (Extensions) — гибкая система дополнений через GNOME Extensions</li>
+  <li>Встроенный поиск по всей системе (Tracker) с индексацией файлов</li>
+  <li>Плавная анимация и прозрачность с аппаратным композитингом</li>
+  <li>Поддержка Wayland по умолчанию (с GNOME 40+)</li>
+  <li>Тёмная тема оформления (с GNOME 42+)</li>
+  <li>Интеграция с онлайн-аккаунтами (Google, Microsoft, Nextcloud)</li>
+  <li>GTK+ 4 — современный тулкит для построения интерфейса</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Современный, чистый и интуитивный интерфейс</li>
+      <li>Отличная поддержка Wayland и HiDPI-экранов</li>
+      <li>Большое сообщество и корпоративная поддержка (Red Hat, Fedora, Ubuntu)</li>
+      <li>Богатая экосистема приложений (GNOME Applications)</li>
+      <li>Регулярные релизы каждые 6 месяцев (строгий график)</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Высокое потребление ресурсов по сравнению с лёгкими DE</li>
+      <li>Отход от традиционной метафоры рабочего стола может отпугнуть новых пользователей</li>
+      <li>Меньше настроек «из коробки» по сравнению с KDE (всё через расширения)</li>
+      <li>Некоторые расширения ломаются после обновлений GNOME Shell</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-000.png" alt="Скриншот GNOME" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">KDE Plasma</h2>
+<div class="de-subsection-title">📌 KDE Plasma</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1998 (KDE 1); 2011 (Plasma 1)</dd>
+  <dt>Поддерживаемые ОС:</dt><dd>Linux, BSD, Windows, macOS (частично)</dd>
+  <dt>Последняя версия:</dt><dd>Plasma 6.4</dd>
+  <dt>Используют:</dt><dd>KDE neon, Kubuntu, openSUSE, Fedora KDE Spin, Manjaro KDE, Debian KDE, Arch Linux, Garuda Linux</dd>
+  <dt>Язык/Тулкит:</dt><dd>C++ (Qt 6)</dd>
+  <dt>Организация:</dt><dd>KDE e.V.</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://kde.org/plasma-desktop">https://kde.org/plasma-desktop</a></dd>
+</dl>
+<p>KDE Plasma — графическое окружение, построенное на базе фреймворка Qt и библиотек KDE Frameworks. Plasma предлагает невероятно гибкий и настраиваемый рабочий стол, который может выглядеть и вести себя так, как нужно пользователю. Это одно из старейших и наиболее функционально насыщенных окружений в мире Linux. В 2024 году вышла Plasma 6 — крупное обновление с переходом на Qt 6 и Wayland по умолчанию.</p>
+<h4>Философия</h4>
+<p>Философия KDE — «мощность через гибкость». Пользователь может настроить буквально каждый аспект рабочего стола: от панелей и виджетов до эффектов окон и тем оформления. Plasma объединяет традиционный рабочий стол с современными возможностями, такими как KRunner (универсальный поиск/запуск), виджеты на рабочем столе и виртуальные рабочие столы. KDE не боится дать пользователю максимум контроля.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>KRunner — универсальный поиск, запуск, калькулятор, конвертер и многое другое</li>
+  <li>Виджеты (Plasmoids) — активные элементы на рабочем столе и панелях</li>
+  <li>Активности (Activities) — различные профили рабочего стола для разных задач</li>
+  <li>KWin — мощный композитный менеджер окон с эффектами (куб, переключение, тени)</li>
+  <li>Невероятная настраиваемость: темы, стили, иконки, шрифты, панели, меню</li>
+  <li>Поддержка Wayland и X11 (Plasma 6 — Wayland по умолчанию)</li>
+  <li>Spectacle — встроенный инструмент для скриншотов с аннотациями</li>
+  <li>Discover — центр управления приложениями и обновлениями (Flatpak, Snap, APT)</li>
+  <li>KDE Connect — интеграция со смартфоном (звонки, SMS, файлы, уведомления)</li>
+  <li>Baloo — файловый поиск и индексация содержимого</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Максимальная гибкость и настраиваемость среди всех DE</li>
+      <li>Богатый набор встроенных приложений (KDE Gear: 200+ приложений)</li>
+      <li>Отличная производительность (Plasma — одно из самых лёгких среди полнофункциональных DE)</li>
+      <li>Поддержка нескольких платформ (Linux, BSD, Windows)</li>
+      <li>Активное сообщество и регулярные ежемесячные обновления</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Обилие настроек может быть ошеломляющим для новичков</li>
+      <li>Исторические проблемы со стабильностью при крупных обновлениях</li>
+      <li>Фрагментация приложений (Qt vs GTK стилизация)</li>
+      <li>По умолчанию может выглядеть «перегруженным» для некоторых пользователей</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-001.png" alt="Скриншот KDE Plasma" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Xfce</h2>
+<div class="de-subsection-title">📌 Xfce</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1996</dd>
+  <dt>Последняя версия:</dt><dd>4.20</dd>
+  <dt>Используют:</dt><dd>Xubuntu, Fedora Xfce Spin, Manjaro Xfce Edition, Debian Xfce, MX Linux, Linux Mint Xfce Edition</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 3)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://xfce.org">https://xfce.org</a></dd>
+</dl>
+<p>Xfce — легковесное графическое окружение, созданное Olivier Fourdan в 1996 году. Xfce сочетает в себе скорость и низкое потребление ресурсов с традиционным, интуитивно понятным интерфейсом. Это идеальный выбор для старых компьютеров и пользователей, которым нужна эффективная рабочая среда без излишеств. Xfce версии 4.20, выпущенная в конце 2024 года, добавила экспериментальную поддержку Wayland.</p>
+<h4>Философия</h4>
+<p>Xfce следует философии Unix: «делай одну вещь и делай её хорошо». Окружение модульное — каждый компонент (панель, менеджер окон, файловый менеджер) можно заменить или настроить независимо. При этом Xfce сохраняет традиционную метафору рабочего стола, привычную пользователям Windows и классических DE.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Xfwm — легковесный менеджер окон с аппаратным композитингом</li>
+  <li>Thunar — быстрый и простой файловый менеджер с плагинами</li>
+  <li>Настраиваемые панели с поддержкой плагинов (часы, монитор, трей, меню)</li>
+  <li>Рабочие пространства (виртуальные рабочие столы) до 32 штук</li>
+  <li>Менеджер настроек — единый центр конфигурации системы</li>
+  <li>Поддержка GTK+ 3 (и GTK+ 4 — экспериментально)</li>
+  <li>Низкое потребление оперативной памяти (~300-400 МБ в покое)</li>
+  <li>Работает на очень старом оборудовании (Pentium III, 256 МБ RAM)</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Очень лёгкий и быстрый — отлично работает на старых ПК</li>
+      <li>Стабильный и надёжный — минимальное количество багов</li>
+      <li>Традиционный рабочий стол — привычный для пользователей Windows</li>
+      <li>Модульная архитектура — можно заменить любой компонент</li>
+      <li>Отличная поддержка в дистрибутивах (Xubuntu, Fedora Xfce Spin)</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Менее современный внешний вид по умолчанию</li>
+      <li>Меньше визуальных эффектов и анимаций</li>
+      <li>Нет встроенного поиска по системе</li>
+      <li>Некоторые возможности требуют ручной настройки</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-003.png" alt="Скриншот Xfce" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">LXDE</h2>
+<div class="de-subsection-title">📌 LXDE</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2006</dd>
+  <dt>Последняя версия:</dt><dd>0.10.1</dd>
+  <dt>Используют:</dt><dd>Lubuntu (до 18.10), Debian LXDE, openSUSE LXDE, Fedora LXDE Spin</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 2)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://lxde.org">https://lxde.org</a></dd>
+</dl>
+<p>LXDE (Lightweight X11 Desktop Environment) — сверхлёгкое графическое окружение, созданное тайваньским разработчиком Hong Jen Yee (PCMan) в 2006 году. Оно изначально проектировалось для экономии ресурсов и работы на нетбуках, старых ПК и встраиваемых системах. LXDE использует GTK+ 2 и состоит из набора независимых компонентов.</p>
+<h4>Философия</h4>
+<p>LXDE создавался как лёгкая альтернатива для компьютеров с ограниченными ресурсами. Каждый компонент LXDE (PCManFM, LXPanel, LXSession) может работать независимо, что позволяет пользователю собирать своё окружение как конструктор. Простота и эффективность — главные приоритеты LXDE.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>PCManFM — быстрый файловый менеджер с вкладками и поддержкой drag-and-drop</li>
+  <li>LXPanel — панель с меню приложений, переключателем задач и системным треем</li>
+  <li>LXSession — менеджер сессий с возможностью сохранения состояния</li>
+  <li>LXRandR — инструмент для настройки мониторов и разрешений</li>
+  <li>LXAppearance — настройка тем, шрифтов и значков</li>
+  <li>Чрезвычайно низкое потребление памяти (~150-200 МБ в покое)</li>
+  <li>Высокая скорость работы даже на Pentium II с 256 МБ RAM</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Экстремально лёгкий — работает на любом оборудовании</li>
+      <li>Очень быстрый запуск и отзывчивость интерфейса</li>
+      <li>Традиционный интерфейс, знакомый пользователям Windows 9x/XP</li>
+      <li>Модульная архитектура — возможность замены компонентов</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Устаревший внешний вид (GTK+ 2)</li>
+      <li>Разработка замедлилась (основной разработчик переключился на LXQt)</li>
+      <li>Меньше возможностей по сравнению с новыми DE</li>
+      <li>Ограниченная поддержка современных технологий</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-004.png" alt="Скриншот LXDE" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">LXQt</h2>
+<div class="de-subsection-title">📌 LXQt</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2013</dd>
+  <dt>Последняя версия:</dt><dd>2.0.0</dd>
+  <dt>Используют:</dt><dd>Lubuntu (с 18.10), Fedora LXQt Spin, openSUSE LXQt, Arch Linux, Manjaro LXQt</dd>
+  <dt>Язык/Тулкит:</dt><dd>C++ (Qt 6)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://lxqt-project.org">https://lxqt-project.org</a></dd>
+</dl>
+<p>LXQt — легковесное графическое окружение, образованное в результате слияния проектов LXDE и Razor-qt в 2013 году. LXQt представляет собой современную переработку идей LXDE на базе Qt вместо GTK+. С версии 2.0.0 (2024) LXQt полностью перешёл на Qt 6, что обеспечивает современный внешний вид и производительность.</p>
+<h4>Философия</h4>
+<p>LXQt наследует философию LXDE (лёгкость и модульность), но использует Qt для более современного внешнего вида и лучшей интеграции с приложениями KDE. Окружение не стремится быть самым красивым — оно стремится быть эффективным и быстрым.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>PCManFM-Qt — файловый менеджер на Qt с вкладками и поиском</li>
+  <li>LXQt Panel — настраиваемая панель с меню, системным треем и плагинами</li>
+  <li>Qt 6 (с версии 2.0.0) — современный фреймворк с поддержкой HiDPI</li>
+  <li>Поддержка Wayland (экспериментальная)</li>
+  <li>OpenBOX как менеджер окон по умолчанию</li>
+  <li>Центр настроек LXQt Config Center</li>
+  <li>Низкое потребление памяти (~200-300 МБ в покое)</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Лёгкий и быстрый — достойный преемник LXDE</li>
+      <li>Современный тулкит Qt 6 (HiDPI, темы, анимация)</li>
+      <li>Модульность и настраиваемость</li>
+      <li>Хорошая интеграция с KDE/Qt приложениями</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Меньше сообщество, чем у LXDE или KDE</li>
+      <li>Меньше встроенных приложений</li>
+      <li>Иногда не хватает внимания к деталям</li>
+      <li>Ограниченная поддержка Wayland</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-005.png" alt="Скриншот LXQt" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">MATE</h2>
+<div class="de-subsection-title">📌 MATE</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2011</dd>
+  <dt>Последняя версия:</dt><dd>1.28</dd>
+  <dt>Используют:</dt><dd>Ubuntu MATE, Linux Mint MATE Edition, Fedora MATE Spin, Debian MATE</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 3)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://mate-desktop.org">https://mate-desktop.org</a></dd>
+</dl>
+<p>MATE — графическое окружение, основанное на коде GNOME 2. Проект был начат в 2011 году аргентинским разработчиком Perberos (Lorenzo Carbonell) после того, как GNOME 3 радикально изменил интерфейс. MATE сохраняет классический рабочий стол GNOME 2 с двумя панелями и традиционным меню.</p>
+<h4>Философия</h4>
+<p>MATE сохраняет традиционную метафору рабочего стола, которая была популярна в эпоху GNOME 2, Windows XP и классических DE. Две панели, меню приложений, иконки на рабочем столе — всё это работает привычно и предсказуемо.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Marco — менеджер окон с композитингом (форк Metacity)</li>
+  <li>Caja — файловый менеджер с расширениями (форк Nautilus)</li>
+  <li>Две панели (верхняя и нижняя) с меню, треем и переключателем</li>
+  <li>Меню приложений (традиционное, как в Windows)</li>
+  <li>Центр управления MATE Control Center</li>
+  <li>Поддержка GTK+ 3</li>
+  <li>Pluma — текстовый редактор, Eye of MATE — просмотрщик изображений</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Классический интерфейс — привычный и интуитивно понятный</li>
+      <li>Умеренное потребление ресурсов</li>
+      <li>Стабильность и надёжность</li>
+      <li>Хорошая поддержка в дистрибутивах</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Устаревший визуальный стиль</li>
+      <li>Нет встроенной поддержки Wayland</li>
+      <li>Меньше современных функций</li>
+      <li>Некоторые компоненты используют устаревшие библиотеки</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-007.png" alt="Скриншот MATE" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Cinnamon</h2>
+<div class="de-subsection-title">📌 Cinnamon</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2011</dd>
+  <dt>Последняя версия:</dt><dd>6.4</dd>
+  <dt>Используют:</dt><dd>Linux Mint (по умолчанию), Fedora Cinnamon Spin, Debian Cinnamon, Arch Linux, Manjaro Cinnamon</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 3), JavaScript</dd>
+  <dt>Организация:</dt><dd>Linux Mint (Clement Lefebvre)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://projects.linuxmint.com/cinnamon">https://projects.linuxmint.com/cinnamon</a></dd>
+</dl>
+<p>Cinnamon — графическое окружение, разработанное командой Linux Mint во главе с Clement Lefebvre. Изначально Cinnamon был оболочкой для GNOME 3, но в 2014 году стал полноценным независимым окружением. Cinnamon сочетает современные технологии (3D-акселерация, анимация) с классическим интерфейсом рабочего стола.</p>
+<h4>Философия</h4>
+<p>Cinnamon создавался для того, чтобы предоставить современное графическое окружение с традиционной метафорой рабочего стола. Нижняя панель с меню «Пуск», иконки на рабочем столе, системный трей — всё это делает Cinnamon идеальным выбором для пользователей, переходящих с Windows.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Нижняя панель с меню приложений (аналог «Пуск»), переключателем задач</li>
+  <li>Док (апплет панели) с избранными и запущенными приложениями</li>
+  <li>Nemo — файловый менеджер с вкладками (форк Nautilus)</li>
+  <li>Cinnamon Settings — центр управления со множеством настроек</li>
+  <li>Muffin — менеджер окон с композитингом (форк Mutter)</li>
+  <li>Десклеты (Desklets) — виджеты на рабочем столе</li>
+  <li>Расширения (Spices) — апплеты, десклеты, темы и расширения</li>
+  <li>Поддержка Wayland (с версии 6.0)</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Привычный интерфейс — лучший выбор для мигрантов с Windows</li>
+      <li>Отличная функциональность «из коробки»</li>
+      <li>Богатый набор настроек без необходимости редактировать файлы</li>
+      <li>Активная разработка и поддержка</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Выше потребление ресурсов, чем у Xfce или MATE</li>
+      <li>Зависимость от GTK+ 3</li>
+      <li>Меньше сообщество расширений, чем у GNOME или KDE</li>
+      <li>В основном ориентирован на Linux Mint</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-008.png" alt="Скриншот Cinnamon" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Budgie</h2>
+<div class="de-subsection-title">📌 Budgie</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2014</dd>
+  <dt>Последняя версия:</dt><dd>10.9</dd>
+  <dt>Используют:</dt><dd>Solus, Ubuntu Budgie, Fedora Budgie Spin, Arch Linux, Manjaro Budgie, openSUSE</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 3), C# (GTK#)</dd>
+  <dt>Организация:</dt><dd>Solus Project</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://buddiesofbudgie.org">https://buddiesofbudgie.org</a></dd>
+</dl>
+<p>Budgie — современное графическое окружение, разработанное для Solus OS командой под руководством Ikey Doherty. Budgie предлагает элегантный, чистый интерфейс, который сочетает в себе простоту GNOME с дополнительными функциями и настраиваемостью.</p>
+<h4>Философия</h4>
+<p>Budgie стремится найти баланс между минимализмом и функциональностью. Интерфейс чистый и ненавязчивый, но при этом предоставляет все необходимые элементы управления. Budgie использует уникальный «пространственный» подход к организации рабочего стола.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Budgie Panel — настраиваемая панель с апплетами</li>
+  <li>Budgie Menu — стильное меню приложений с категориями и поиском</li>
+  <li>Рабочие пространства (Workspaces) с обзором</li>
+  <li>Raven — боковая панель с уведомлениями, календарём и настройками</li>
+  <li>Icon Task List — переключатель задач с иконками приложений</li>
+  <li>Режим «мигания» окон при получении уведомления</li>
+  <li>Поддержка Wayland</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Современный, чистый и элегантный дизайн</li>
+      <li>Интуитивно понятный интерфейс без излишеств</li>
+      <li>Хорошая производительность</li>
+      <li>Уникальные элементы (Raven, Icon Task List)</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Меньше дистрибутивов с официальной поддержкой</li>
+      <li>Ограниченная экосистема расширений и тем</li>
+      <li>Меньше сообщество, чем у GNOME или KDE</li>
+      <li>Исторически была привязана к Solus OS</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-009.jpg" alt="Скриншот Budgie" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Deepin (DDE)</h2>
+<div class="de-subsection-title">📌 Deepin (DDE)</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2015</dd>
+  <dt>Последняя версия:</dt><dd>DDE 23 (25)</dd>
+  <dt>Используют:</dt><dd>Deepin, UbuntuDDE, Arch Linux, Manjaro Deepin</dd>
+  <dt>Язык/Тулкит:</dt><dd>C++ (Qt 5), Go</dd>
+  <dt>Организация:</dt><dd>Wuhan Deepin Technology Co., Ltd.</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://www.deepin.org/en/dde">https://www.deepin.org/en/dde</a></dd>
+</dl>
+<p>Deepin Desktop Environment (DDE) — графическое окружение, разработанное китайской компанией Wuhan Deepin Technology для дистрибутива Deepin. DDE известен своим красивым, современным дизайном, вдохновлённым macOS и Windows. Это одно из самых эстетически привлекательных графических окружений в мире Linux.</p>
+<h4>Философия</h4>
+<p>DDE ставит во главу угла эстетику и удобство. Каждый элемент интерфейса тщательно проработан визуально: анимации, тени, прозрачность, иконки. Deepin стремится предоставить пользовательский опыт, который не уступает коммерческим операционным системам.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>DDE Dock — панель-док в стиле macOS с эффектами</li>
+  <li>Launcher — полноэкранное меню приложений в стиле macOS Launchpad</li>
+  <li>Control Center — унифицированный центр настроек в стиле Windows 10</li>
+  <li>Deepin App Store — магазин приложений</li>
+  <li>Встроенные приложения: Deepin Music, Deepin Movie, Deepin Terminal</li>
+  <li>Плавные анимации, тени, прозрачность с аппаратным ускорением</li>
+  <li>Поддержка Wayland</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Один из самых красивых DE с продуманным дизайном</li>
+      <li>Множество встроенных приложений</li>
+      <li>Интуитивный интерфейс, понятный новичкам</li>
+      <li>Хорошая поддержка русского языка</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Высокое потребление ресурсов</li>
+      <li>Сильная привязка к экосистеме Deepin</li>
+      <li>Проблемы с совместимостью в не-Debian дистрибутивах</li>
+      <li>Китайское происхождение вызывает вопросы о конфиденциальности</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-010.png" alt="Скриншот Deepin (DDE)" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Enlightenment</h2>
+<div class="de-subsection-title">📌 Enlightenment</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1997</dd>
+  <dt>Последняя версия:</dt><dd>DR 0.26 (E26)</dd>
+  <dt>Используют:</dt><dd>Bodhi Linux, Arch Linux, Fedora, openSUSE, Debian</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (EFL)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://www.enlightenment.org">https://www.enlightenment.org</a></dd>
+</dl>
+<p>Enlightenment (часто называют просто «E») — одно из старейших графических окружений, основанное Carsten Haitzler (Rasterman) в 1997 году. Уникальность Enlightenment в том, что это одновременно и оконный менеджер, и полноценное графическое окружение, построенное на собственных библиотеках EFL.</p>
+<h4>Философия</h4>
+<p>Enlightenment всегда был на переднем крае визуальных эффектов и инноваций. В конце 1990-х E16 поражал пользователей прозрачностью и анимацией, когда другие DE только осваивали базовые возможности. Enlightenment использует собственный тулкит EFL, что даёт полный контроль над производительностью и внешним видом.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>EFL (Enlightenment Foundation Libraries) — собственный набор библиотек</li>
+  <li>Встроенный композитный менеджер окон с множеством эффектов</li>
+  <li>Гаджеты (Gadgets) — модульные элементы на рабочем столе</li>
+  <li>Виртуальные рабочие столы в стиле «куб»</li>
+  <li>Модульная архитектура</li>
+  <li>Низкое потребление ресурсов при богатых визуальных эффектах</li>
+  <li>Тематический движок Edje</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Уникальный, непохожий на другие DE интерфейс</li>
+      <li>Низкое потребление ресурсов при отличных визуальных эффектах</li>
+      <li>Невероятная гибкость и настраиваемость</li>
+      <li>Собственная библиотека EFL</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Необычный интерфейс требует привыкания</li>
+      <li>Сложность в настройке</li>
+      <li>EFL-приложения несовместимы с GTK/Qt экосистемой</li>
+      <li>Небольшое сообщество</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-011.png" alt="Скриншот Enlightenment" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Pantheon</h2>
+<div class="de-subsection-title">📌 Pantheon</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2011</dd>
+  <dt>Последняя версия:</dt><dd>8.0</dd>
+  <dt>Используют:</dt><dd>elementary OS, Fedora Pantheon Spin, Arch Linux, Manjaro Pantheon</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (GTK+ 3), Vala</dd>
+  <dt>Организация:</dt><dd>elementary, Inc.</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://elementary.io">https://elementary.io</a></dd>
+</dl>
+<p>Pantheon — графическое окружение, разработанное командой elementary OS. Pantheon известен своим элегантным дизайном, вдохновлённым macOS, и строгим следованием принципам пользовательского опыта (UX).</p>
+<h4>Философия</h4>
+<p>Pantheon следует философии «сначала дизайн». Каждая деталь интерфейса продумана с точки зрения удобства и эстетики. Pantheon придерживается концепции «pay-what-you-want» для приложений и стремится создать Linux-систему, которая не уступает macOS по качеству взаимодействия.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Wingpanel — верхняя панель с меню, индикаторами и уведомлениями</li>
+  <li>Dock — нижняя панель-док с приложениями (в стиле macOS)</li>
+  <li>Slingshot — полноэкранный лаунчер приложений с категориями</li>
+  <li>Switchboard — центр настроек с панелями-плагинами</li>
+  <li>Gala — оконный менеджер с композитингом</li>
+  <li>Pantheon Mail, Calendar, Music, Photos — встроенные приложения</li>
+  <li>Scratch — простой текстовый редактор</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Красивый, целостный дизайн</li>
+      <li>Отличное внимание к деталям и пользовательскому опыту</li>
+      <li>Быстрый и отзывчивый интерфейс</li>
+      <li>Хорошо интегрированные собственные приложения</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Доступен в основном только в elementary OS</li>
+      <li>Ограниченная настраиваемость</li>
+      <li>Мало сторонних тем и расширений</li>
+      <li>Небольшое сообщество</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-012.png" alt="Скриншот Pantheon" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Sugar</h2>
+<div class="de-subsection-title">📌 Sugar</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2006</dd>
+  <dt>Последняя версия:</dt><dd>0.121</dd>
+  <dt>Используют:</dt><dd>Fedora SoaS, Debian Edu, Ubuntu Sugar Spin, Arch Linux</dd>
+  <dt>Язык/Тулкит:</dt><dd>Python (GTK+ 3), HTML/JavaScript</dd>
+  <dt>Организация:</dt><dd>Sugar Labs</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://sugarlabs.org">https://sugarlabs.org</a></dd>
+</dl>
+<p>Sugar — уникальное графическое окружение, разработанное для проекта One Laptop Per Child (OLPC). В отличие от традиционных DE, Sugar создан специально для образовательных целей — для обучения детей в возрасте от 3 до 12 лет.</p>
+<h4>Философия</h4>
+<p>Sugar основан на педагогической философии конструктивизма. Интерфейс построен вокруг «Дома» (Home view) — сетки с активностями (Activities), а не приложениями. Нет папок, файлов, меню «Пуск» — только те инструменты, которые нужны ребёнку для обучения и творчества.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Home View — стартовый экран с активностями</li>
+  <li>Activities — образовательные приложения</li>
+  <li>Collaboration — встроенная поддержка совместной работы по сети</li>
+  <li>Journal — журнал всех действий</li>
+  <li>Neighborhood — просмотр других пользователей в сети</li>
+  <li>Frame — панель с активностями, друзьями и устройствами</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Уникальная образовательная среда, не имеющая аналогов</li>
+      <li>Развивает логику, творчество и навыки сотрудничества</li>
+      <li>Работает на очень старом оборудовании</li>
+      <li>Не требует привычных навыков работы с ПК</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Не подходит для повседневной работы и взрослых пользователей</li>
+      <li>Ограниченная функциональность вне образования</li>
+      <li>Необычный интерфейс требует переобучения</li>
+      <li>Мало дистрибутивов с поддержкой</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-013.png" alt="Скриншот Sugar" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Trinity (TDE)</h2>
+<div class="de-subsection-title">📌 Trinity (TDE)</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2010</dd>
+  <dt>Последняя версия:</dt><dd>R14.1.2</dd>
+  <dt>Используют:</dt><dd>Debian TDE, openSUSE TDE, Ubuntu TDE, PCLinuxOS TDE</dd>
+  <dt>Язык/Тулкит:</dt><dd>C++ (Qt 3)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://trinitydesktop.org">https://trinitydesktop.org</a></dd>
+</dl>
+<p>Trinity Desktop Environment (TDE) — форк KDE 3.5.x, созданный после того, как KDE 4 кардинально изменил интерфейс. TDE сохраняет классический дизайн и функциональность KDE 3, продолжая развиваться и исправлять ошибки.</p>
+<h4>Философия</h4>
+<p>TDE сохраняет классическую парадигму рабочего стола KDE 3 — эпохи, когда KDE был простым, интуитивным и предсказуемым. Никаких революций, никаких радикальных изменений — только эволюционные улучшения и исправления.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Традиционный рабочий стол с меню K-Menu, иконками и панелями</li>
+  <li>Kicker — классическая панель с меню, треем и переключателем задач</li>
+  <li>KDE Control Center — единый центр настроек</li>
+  <li>KPersonalizer — мастер настройки рабочего стола</li>
+  <li>Совместимость с приложениями KDE 3</li>
+  <li>k3b — мощный инструмент для записи дисков</li>
+  <li>Konqueror — файловый менеджер и браузер</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Классический KDE 3 — быстрый, стабильный, привычный</li>
+      <li>Отличная совместимость с legacy-приложениями</li>
+      <li>Низкое потребление ресурсов</li>
+      <li>Активно поддерживается сообществом</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Устаревший внешний вид (Qt 3)</li>
+      <li>Нет поддержки Wayland и HiDPI</li>
+      <li>Ограниченная поддержка современных приложений</li>
+      <li>Мало дистрибутивов с поддержкой</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-014.png" alt="Скриншот Trinity (TDE)" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">CDE</h2>
+<div class="de-subsection-title">📌 CDE</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1993</dd>
+  <dt>Последняя версия:</dt><dd>2.5.2</dd>
+  <dt>Используют:</dt><dd>Debian, Arch Linux, Fedora, FreeBSD</dd>
+  <dt>Язык/Тулкит:</dt><dd>C (Motif/Xm)</dd>
+  <dt>Организация:</dt><dd>The Open Group / CDE Project</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://sourceforge.net/projects/cdesktopenv">https://sourceforge.net/projects/cdesktopenv</a></dd>
+</dl>
+<p>CDE (Common Desktop Environment) — классическое графическое окружение, разработанное в начале 1990-х годов консорциумом COSE (Hewlett-Packard, IBM, Sun, Novell, USL). С 2012 года CDE доступен с открытым исходным кодом под лицензией LGPL. Это окружение было стандартом для коммерческих Unix-систем в 1990-е годы.</p>
+<h4>Философия</h4>
+<p>CDE представляет собой классический Unix-рабочий стол 1990-х годов. Он спроектирован для профессиональных пользователей Unix-систем, где стабильность и предсказуемость важнее визуальных эффектов.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Менеджер окон Motif Window Manager (MWM)</li>
+  <li>Панель Front Panel — настраиваемая панель с меню и приложениями</li>
+  <li>File Manager — файловый менеджер в стиле Motif</li>
+  <li>Text Editor, Calculator, Calendar, Mailer — встроенные приложения</li>
+  <li>Session Manager — управление сессиями</li>
+  <li>Style Manager — настройка цветов, шрифтов и поведения</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Историческое значение — стандарт Unix 1990-х</li>
+      <li>Чрезвычайно стабильный и предсказуемый</li>
+      <li>Минимальное потребление ресурсов</li>
+      <li>Работает практически на любом оборудовании</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Очень устаревший внешний вид</li>
+      <li>Нет поддержки современных технологий</li>
+      <li>Нет композитинга и анимаций</li>
+      <li>Неудобен для современных пользователей</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/de-article/de-screenshot-015.png" alt="Скриншот CDE" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Заключение и рекомендации</h2>
+
+<p>Выбор графического окружения — это глубоко личное решение, которое зависит от ваших потребностей, привычек и технических требований.</p>
+
+<div class="de-recommendation">
+  <h4>Рекомендации по выбору</h4>
+  <ul>
+    <li><strong>Для новичков в Linux:</strong> GNOME, Cinnamon, Budgie — интуитивные интерфейсы, минимум настроек.</li>
+    <li><strong>Для опытных пользователей:</strong> KDE Plasma — максимальная гибкость и настраиваемость.</li>
+    <li><strong>Для старого оборудования:</strong> Xfce, LXQt, LXDE — минимальное потребление ресурсов.</li>
+    <li><strong>Для эстетов:</strong> Deepin (DDE), Pantheon (elementary OS) — красивейшие интерфейсы.</li>
+    <li><strong>Для минималистов:</strong> Enlightenment, LXQt — лёгкие, быстрые, без лишнего.</li>
+    <li><strong>Для образования:</strong> Sugar — уникальная среда для обучения детей.</li>
+    <li><strong>Для ностальгии:</strong> Trinity (TDE) или CDE — возвращают в прошлое.</li>
+  </ul>
+</div>
+
+<h4>Итоговая таблица популярности</h4>
+
+<table class="de-final-table">
+  <thead>
+    <tr>
+      <th>DE</th>
+      <th>Популярность</th>
+      <th>Активность разработки</th>
+      <th>Сообщество</th>
+      <th>Общий рейтинг</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GNOME</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>15/15</td>
+    </tr>
+    <tr>
+      <td>KDE Plasma</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>15/15</td>
+    </tr>
+    <tr>
+      <td>Xfce</td>
+      <td>★★★★☆</td>
+      <td>★★★★☆</td>
+      <td>★★★★☆</td>
+      <td>12/15</td>
+    </tr>
+    <tr>
+      <td>Cinnamon</td>
+      <td>★★★★☆</td>
+      <td>★★★★☆</td>
+      <td>★★★★☆</td>
+      <td>12/15</td>
+    </tr>
+    <tr>
+      <td>MATE</td>
+      <td>★★★★☆</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+      <td>11/15</td>
+    </tr>
+    <tr>
+      <td>Budgie</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+      <td>★★★☆☆</td>
+      <td>10/15</td>
+    </tr>
+    <tr>
+      <td>Deepin</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+      <td>★★★☆☆</td>
+      <td>10/15</td>
+    </tr>
+    <tr>
+      <td>LXQt</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+      <td>★★★☆☆</td>
+      <td>10/15</td>
+    </tr>
+    <tr>
+      <td>Pantheon</td>
+      <td>★★★☆☆</td>
+      <td>★★★☆☆</td>
+      <td>★★★☆☆</td>
+      <td>9/15</td>
+    </tr>
+    <tr>
+      <td>LXDE</td>
+      <td>★★★☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>★★★☆☆</td>
+      <td>8/15</td>
+    </tr>
+    <tr>
+      <td>Enlightenment</td>
+      <td>★★☆☆☆</td>
+      <td>★★★☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>7/15</td>
+    </tr>
+    <tr>
+      <td>Trinity (TDE)</td>
+      <td>★★☆☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>6/15</td>
+    </tr>
+    <tr>
+      <td>Sugar</td>
+      <td>★★☆☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>6/15</td>
+    </tr>
+    <tr>
+      <td>CDE</td>
+      <td>★☆☆☆☆</td>
+      <td>★★☆☆☆</td>
+      <td>★☆☆☆☆</td>
+      <td>4/15</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="de-footer-note">
+  <p>Статья подготовлена в ознакомительных целях. Версии и данные актуальны на начало 2026 года.</p>
+</div>
+    </template>
+
+    <script src="data.js?v=8"></script>
+    <script src="script.js?v=9"></script>
 </body>
 </html>
