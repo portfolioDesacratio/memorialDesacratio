@@ -482,6 +482,26 @@ async function loadArticles() {
     } else {
         console.warn('[DE] template not found');
     }
+
+    // Статья WM встроена в <template id="wmArticleTemplate"> в index.html
+    const wmTemplate = document.getElementById('wmArticleTemplate');
+    if (wmTemplate) {
+        const html = wmTemplate.innerHTML;
+        const hasImages = html.indexOf('<img') >= 0;
+        console.log('[WM] from template, has images:', hasImages, 'length:', html.length);
+        // Удаляем старую версию, если есть
+        const idx = articles.findIndex(a => a.title === 'Оконные менеджеры. WM');
+        if (idx >= 0) articles.splice(idx, 1);
+        articles.push({
+            title: 'Оконные менеджеры. WM',
+            category: 'Linux',
+            type: 'HTML',
+            date: 'мая 2026',
+            content: html
+        });
+    } else {
+        console.warn('[WM] template not found');
+    }
 }
 
 // ---- Рендер статей ----

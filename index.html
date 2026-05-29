@@ -1164,6 +1164,542 @@
 </div>
     </template>
 
+    <!-- Статья WM встроена в template -->
+    <template id="wmArticleTemplate">
+<div class="de-intro">
+  <p>Оконный менеджер (Window Manager, WM) — это программа, которая управляет размещением и внешним видом окон в графической системе X11 или Wayland. В отличие от полноценных графических окружений (DE), WM фокусируется исключительно на управлении окнами, предоставляя пользователю максимальный контроль и минимальное потребление ресурсов. В этой статье мы рассмотрим 15 лучших оконных менеджеров для Linux.</p>
+</div>
+
+<div class="de-toc">
+  <h2 class="de-section-title">Содержание</h2>
+  <ol>
+    <li>i3</li>
+    <li>Sway</li>
+    <li>Openbox</li>
+    <li>bspwm</li>
+    <li>dwm</li>
+    <li>Awesome</li>
+    <li>Xmonad</li>
+    <li>Qtile</li>
+    <li>Herbstluftwm</li>
+    <li>Hyprland</li>
+    <li>LeftWM</li>
+    <li>Spectrwm</li>
+    <li>Fluxbox</li>
+    <li>IceWM</li>
+    <li>Enlightenment</li>
+  </ol>
+</div>
+
+<h2 class="de-section-title">i3</h2>
+<div class="de-subsection-title">📌 i3</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2009</dd>
+  <dt>Тип:</dt><dd>Тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>Текстовый файл (~/.config/i3/config)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://i3wm.org">https://i3wm.org</a></dd>
+</dl>
+<p>i3 — один из самых популярных тайлинговых оконных менеджеров. Он автоматически размещает окна в виде плиток, максимально эффективно используя пространство экрана. i3 известен своей простотой, скоростью и отличной документацией. Это идеальный выбор для тех, кто хочет работать преимущественно с клавиатуры.</p>
+<h4>Философия</h4>
+<p>i3 следует принципу "делай одно дело хорошо". Он не пытается быть полноценным DE — только управление окнами. Вся конфигурация в одном текстовом файле, все действия через горячие клавиши. i3 заставляет думать о рабочем пространстве как о дереве контейнеров.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Автоматическое тайлинговое размещение окон (горизонтальное/вертикальное)</li>
+  <li>Режимы: tiling, stacking, tabbed, floating</li>
+  <li>Множественные рабочие пространства (workspaces) с быстрым переключением</li>
+  <li>i3bar — встроенная панель с поддержкой i3status/i3blocks</li>
+  <li>IPC интерфейс для скриптов и автоматизации</li>
+  <li>Минимальное потребление ресурсов (~50-100 МБ RAM)</li>
+  <li>Полностью управляется с клавиатуры</li>
+  <li>Отличная документация и активное сообщество</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Очень быстрый и легковесный</li>
+      <li>Простая и понятная конфигурация</li>
+      <li>Отличная документация</li>
+      <li>Большое сообщество и множество гайдов</li>
+      <li>Стабильный и надежный</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Крутая кривая обучения для новичков</li>
+      <li>Требует ручной настройки всего (панель, обои, композитинг)</li>
+      <li>Только X11 (для Wayland используй Sway)</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/wm-article/wm-screenshot-001.png" alt="Скриншот i3" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Sway</h2>
+<div class="de-subsection-title">📌 Sway</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2015</dd>
+  <dt>Тип:</dt><dd>Тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>Wayland</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>Совместим с i3 (~/.config/sway/config)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://swaywm.org">https://swaywm.org</a></dd>
+</dl>
+<p>Sway — это i3-совместимый композитор для Wayland. Если ты знаешь i3, то знаешь и Sway — конфигурация практически идентична. Sway предлагает все преимущества i3, но с современным протоколом Wayland, что означает лучшую безопасность, производительность и поддержку HiDPI.</p>
+<h4>Философия</h4>
+<p>Sway — это "i3 для Wayland". Разработчики стремились к 100% совместимости с i3, чтобы пользователи могли легко мигрировать. При этом Sway использует все преимущества Wayland: изоляция приложений, отсутствие screen tearing, нативная поддержка HiDPI.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>100% совместимость конфигурации с i3</li>
+  <li>Встроенный композитор (не нужен отдельный picom/compton)</li>
+  <li>Нативная поддержка Wayland и HiDPI</li>
+  <li>Лучшая безопасность (изоляция приложений)</li>
+  <li>Swaybar и swaylock — встроенные инструменты</li>
+  <li>Поддержка нескольких мониторов с разными DPI</li>
+  <li>Отсутствие screen tearing</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Современный Wayland вместо устаревшего X11</li>
+      <li>Легкая миграция с i3</li>
+      <li>Встроенный композитор</li>
+      <li>Отличная поддержка HiDPI</li>
+      <li>Более безопасный, чем X11</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>Некоторые X11-приложения работают через XWayland (медленнее)</li>
+      <li>Меньше совместимых инструментов, чем у i3</li>
+      <li>Требует более новое оборудование</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/wm-article/wm-screenshot-002.png" alt="Скриншот Sway" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Openbox</h2>
+<div class="de-subsection-title">📌 Openbox</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2002</dd>
+  <dt>Тип:</dt><dd>Stacking (плавающий) WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>XML (~/.config/openbox/)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="http://openbox.org">http://openbox.org</a></dd>
+</dl>
+<p>Openbox — легковесный плавающий оконный менеджер с высокой степенью настраиваемости. В отличие от тайлинговых WM, Openbox использует традиционную метафору окон, которые можно свободно перемещать и изменять размер. Это отличный выбор для тех, кто хочет легковесность без радикального изменения привычного рабочего процесса.</p>
+<h4>Философия</h4>
+<p>Openbox стремится быть минималистичным, но функциональным. Он предоставляет только управление окнами, оставляя выбор панели, меню и других компонентов пользователю. Openbox часто используется как основа для создания собственных легковесных окружений.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Традиционное плавающее управление окнами</li>
+  <li>Контекстное меню по правой кнопке мыши</li>
+  <li>Поддержка тем оформления</li>
+  <li>Горячие клавиши и действия мыши</li>
+  <li>Может работать как standalone или внутри DE (LXDE, LXQt)</li>
+  <li>Очень низкое потребление ресурсов</li>
+  <li>Конфигурация через XML-файлы</li>
+</ul>
+<div class="de-pros-cons">
+  <div class="de-pros">
+    <span class="de-pros-title">✓ Достоинства</span>
+    <ul>
+      <li>Очень легковесный и быстрый</li>
+      <li>Привычный интерфейс для новичков</li>
+      <li>Высокая настраиваемость</li>
+      <li>Стабильный и проверенный временем</li>
+      <li>Можно использовать внутри других DE</li>
+    </ul>
+  </div>
+  <div class="de-cons">
+    <span class="de-cons-title">✗ Недостатки</span>
+    <ul>
+      <li>XML-конфигурация может быть сложной</li>
+      <li>Требует ручной настройки всех компонентов</li>
+      <li>Разработка замедлилась в последние годы</li>
+    </ul>
+  </div>
+</div>
+<img src="assets/images/wm-article/wm-screenshot-003.png" alt="Скриншот Openbox" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">bspwm</h2>
+<div class="de-subsection-title">📌 bspwm</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2013</dd>
+  <dt>Тип:</dt><dd>Тайлинговый WM (Binary Space Partitioning)</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>Shell-скрипты (~/.config/bspwm/)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://github.com/baskerville/bspwm">GitHub</a></dd>
+</dl>
+<p>bspwm (Binary Space Partitioning Window Manager) — тайлинговый WM, который представляет окна как листья полного бинарного дерева. Каждое новое окно делит пространство пополам. bspwm уникален тем, что управление горячими клавишами вынесено в отдельную программу (sxhkd), что делает его крайне гибким.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Binary Space Partitioning — уникальный алгоритм размещения</li>
+  <li>Управление через сообщения (bspc)</li>
+  <li>Горячие клавиши через sxhkd (отдельная программа)</li>
+  <li>Поддержка нескольких мониторов</li>
+  <li>Конфигурация через shell-скрипты</li>
+  <li>Очень гибкий и расширяемый</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-004.png" alt="Скриншот bspwm" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">dwm</h2>
+<div class="de-subsection-title">📌 dwm</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2006</dd>
+  <dt>Тип:</dt><dd>Динамический тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>Исходный код (config.h) — требует перекомпиляции</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://dwm.suckless.org">https://dwm.suckless.org</a></dd>
+</dl>
+<p>dwm (dynamic window manager) — минималистичный тайлинговый WM от suckless.org. Весь исходный код менее 2000 строк. Конфигурация осуществляется путём редактирования исходного кода и перекомпиляции. dwm следует философии suckless: "программа должна делать одно дело и делать его хорошо".</p>
+<h4>Философия</h4>
+<p>dwm — это манифест минимализма. Никаких конфигурационных файлов — только исходный код. Хочешь изменить поведение? Отредактируй config.h и перекомпилируй. Это заставляет пользователя понимать, как работает WM на низком уровне.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Менее 2000 строк кода</li>
+  <li>Конфигурация через исходный код</li>
+  <li>Патчи для расширения функциональности</li>
+  <li>Встроенная панель (dwmbar)</li>
+  <li>Теги вместо рабочих пространств</li>
+  <li>Экстремально низкое потребление ресурсов</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-005.png" alt="Скриншот dwm" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Awesome</h2>
+<div class="de-subsection-title">📌 Awesome</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2007</dd>
+  <dt>Тип:</dt><dd>Динамический тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C + Lua</dd>
+  <dt>Конфигурация:</dt><dd>Lua-скрипты (~/.config/awesome/rc.lua)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://awesomewm.org">https://awesomewm.org</a></dd>
+</dl>
+<p>Awesome — высоконастраиваемый тайлинговый WM с конфигурацией на языке Lua. Это один из самых мощных и гибких WM, позволяющий создавать сложные виджеты, панели и автоматизацию. Awesome подходит для тех, кто хочет полного контроля и готов писать код.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Конфигурация на Lua — полноценный язык программирования</li>
+  <li>Встроенная система виджетов</li>
+  <li>Поддержка тем и красивых панелей</li>
+  <li>Динамические теги (workspaces)</li>
+  <li>Встроенный системный трей</li>
+  <li>Поддержка нескольких мониторов</li>
+  <li>Активное сообщество и множество конфигураций</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-006.png" alt="Скриншот Awesome" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Xmonad</h2>
+<div class="de-subsection-title">📌 Xmonad</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2007</dd>
+  <dt>Тип:</dt><dd>Динамический тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>Haskell</dd>
+  <dt>Конфигурация:</dt><dd>Haskell (~/.xmonad/xmonad.hs)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://xmonad.org">https://xmonad.org</a></dd>
+</dl>
+<p>Xmonad — тайлинговый WM, написанный и настраиваемый на функциональном языке Haskell. Благодаря строгой типизации Haskell, Xmonad крайне стабилен и предсказуем. Это выбор для программистов, которые ценят математическую строгость и функциональное программирование.</p>
+<img src="assets/images/wm-article/wm-screenshot-007.png" alt="Скриншот Xmonad" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Qtile</h2>
+<div class="de-subsection-title">📌 Qtile</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2008</dd>
+  <dt>Тип:</dt><dd>Тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11, Wayland (экспериментально)</dd>
+  <dt>Язык:</dt><dd>Python</dd>
+  <dt>Конфигурация:</dt><dd>Python (~/.config/qtile/config.py)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="http://www.qtile.org">http://www.qtile.org</a></dd>
+</dl>
+<p>Qtile — тайлинговый WM, полностью написанный и настраиваемый на Python. Это делает его одним из самых доступных для кастомизации WM — если ты знаешь Python, ты можешь настроить Qtile под любые нужды. Qtile также имеет встроенную поддержку виджетов и панелей.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>100% Python — легко читать и модифицировать</li>
+  <li>Встроенная панель с виджетами</li>
+  <li>Поддержка нескольких layouts</li>
+  <li>Экспериментальная поддержка Wayland</li>
+  <li>Простая конфигурация для Python-разработчиков</li>
+  <li>Активное развитие</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-008.png" alt="Скриншот Qtile" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Herbstluftwm</h2>
+<div class="de-subsection-title">📌 Herbstluftwm</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2011</dd>
+  <dt>Тип:</dt><dd>Ручной тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C++</dd>
+  <dt>Конфигурация:</dt><dd>Shell-скрипты</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://herbstluftwm.org">https://herbstluftwm.org</a></dd>
+</dl>
+<p>Herbstluftwm — ручной тайлинговый WM, где пользователь сам решает, как разделить экран. Вместо автоматического размещения окон, ты создаёшь фреймы и помещаешь в них окна. Это даёт максимальный контроль над layout'ом.</p>
+<img src="assets/images/wm-article/wm-screenshot-009.png" alt="Скриншот Herbstluftwm" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Hyprland</h2>
+<div class="de-subsection-title">📌 Hyprland</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2021</dd>
+  <dt>Тип:</dt><dd>Динамический тайлинговый композитор</dd>
+  <dt>Протокол:</dt><dd>Wayland</dd>
+  <dt>Язык:</dt><dd>C++</dd>
+  <dt>Конфигурация:</dt><dd>Текстовый файл (~/.config/hypr/hyprland.conf)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://hyprland.org">https://hyprland.org</a></dd>
+</dl>
+<p>Hyprland — современный Wayland-композитор с красивыми анимациями и эффектами. Это один из самых визуально привлекательных тайлинговых WM, сочетающий производительность с эстетикой. Hyprland активно развивается и быстро набирает популярность.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Плавные анимации и эффекты</li>
+  <li>Wayland-нативный</li>
+  <li>Динамическое тайлинговое размещение</li>
+  <li>Поддержка закруглённых углов и теней</li>
+  <li>Отличная поддержка нескольких мониторов</li>
+  <li>Активное развитие и современный код</li>
+  <li>IPC для скриптов</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-010.png" alt="Скриншот Hyprland" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">LeftWM</h2>
+<div class="de-subsection-title">📌 LeftWM</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2020</dd>
+  <dt>Тип:</dt><dd>Тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>Rust</dd>
+  <dt>Конфигурация:</dt><dd>TOML (~/.config/leftwm/config.toml)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://github.com/leftwm/leftwm">GitHub</a></dd>
+</dl>
+<p>LeftWM — тайлинговый WM, написанный на Rust. Он фокусируется на стабильности, производительности и простоте конфигурации. LeftWM использует систему "тем", что позволяет легко менять внешний вид и поведение.</p>
+<img src="assets/images/wm-article/wm-screenshot-011.png" alt="Скриншот LeftWM" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Spectrwm</h2>
+<div class="de-subsection-title">📌 Spectrwm</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2009</dd>
+  <dt>Тип:</dt><dd>Динамический тайлинговый WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>Текстовый файл (~/.spectrwm.conf)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://github.com/conformal/spectrwm">GitHub</a></dd>
+</dl>
+<p>Spectrwm (ранее scrotwm) — минималистичный тайлинговый WM, созданный для профессионалов. Он написан хакерами для хакеров, с фокусом на эффективность и минимализм. Spectrwm работает "из коробки" с разумными настройками по умолчанию.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Простая конфигурация в одном файле</li>
+  <li>Встроенная панель</li>
+  <li>Поддержка нескольких мониторов</li>
+  <li>Минимальное потребление ресурсов</li>
+  <li>Работает на BSD и Linux</li>
+  <li>Разумные настройки по умолчанию</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-012.png" alt="Скриншот Spectrwm" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Fluxbox</h2>
+<div class="de-subsection-title">📌 Fluxbox</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>2001</dd>
+  <dt>Тип:</dt><dd>Stacking WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C++</dd>
+  <dt>Конфигурация:</dt><dd>Текстовые файлы (~/.fluxbox/)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="http://fluxbox.org">http://fluxbox.org</a></dd>
+</dl>
+<p>Fluxbox — легковесный stacking WM, основанный на Blackbox. Он предлагает традиционное управление окнами с вкладками, группировкой и темами. Fluxbox — отличный выбор для тех, кто хочет легковесность без перехода на тайлинг.</p>
+<img src="assets/images/wm-article/wm-screenshot-013.png" alt="Скриншот Fluxbox" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">IceWM</h2>
+<div class="de-subsection-title">📌 IceWM</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1997</dd>
+  <dt>Тип:</dt><dd>Stacking WM</dd>
+  <dt>Протокол:</dt><dd>X11</dd>
+  <dt>Язык:</dt><dd>C++</dd>
+  <dt>Конфигурация:</dt><dd>Текстовые файлы (~/.icewm/)</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://ice-wm.org">https://ice-wm.org</a></dd>
+</dl>
+<p>IceWM — один из старейших легковесных WM, имитирующий интерфейс Windows 95/NT. Он предлагает знакомый интерфейс с панелью задач, системным треем и меню "Пуск". IceWM идеален для старых компьютеров и пользователей, переходящих с Windows.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Интерфейс в стиле Windows 95</li>
+  <li>Встроенная панель задач</li>
+  <li>Системный трей</li>
+  <li>Поддержка тем</li>
+  <li>Очень низкое потребление ресурсов</li>
+  <li>Работает на древнем железе</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-014.png" alt="Скриншот IceWM" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Enlightenment</h2>
+<div class="de-subsection-title">📌 Enlightenment</div>
+<dl class="de-meta">
+  <dt>Первый выпуск:</dt><dd>1997</dd>
+  <dt>Тип:</dt><dd>Композитный WM / DE</dd>
+  <dt>Протокол:</dt><dd>X11, Wayland</dd>
+  <dt>Язык:</dt><dd>C</dd>
+  <dt>Конфигурация:</dt><dd>GUI настройки</dd>
+  <dt>Веб-сайт:</dt><dd><a href="https://www.enlightenment.org">https://www.enlightenment.org</a></dd>
+</dl>
+<p>Enlightenment (E) — это нечто среднее между WM и полноценным DE. Он предлагает красивые эффекты, анимации и богатую функциональность, оставаясь при этом относительно легковесным. Enlightenment известен своим уникальным дизайном и инновационными решениями.</p>
+<h4>Ключевые особенности</h4>
+<ul>
+  <li>Красивые эффекты и анимации</li>
+  <li>Встроенный композитор</li>
+  <li>Модульная архитектура</li>
+  <li>Поддержка Wayland и X11</li>
+  <li>Виджеты и гаджеты</li>
+  <li>Уникальный дизайн</li>
+</ul>
+<img src="assets/images/wm-article/wm-screenshot-015.png" alt="Скриншот Enlightenment" class="de-screenshot" loading="lazy">
+
+<h2 class="de-section-title">Сравнительная таблица</h2>
+<table class="de-comparison-table">
+  <thead>
+    <tr>
+      <th>WM</th>
+      <th>Тип</th>
+      <th>Протокол</th>
+      <th>Язык конфигурации</th>
+      <th>Сложность</th>
+      <th>Ресурсы</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>i3</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>Текст</td>
+      <td>★★★☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Sway</td>
+      <td>Тайлинговый</td>
+      <td>Wayland</td>
+      <td>Текст (i3-like)</td>
+      <td>★★★☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Openbox</td>
+      <td>Stacking</td>
+      <td>X11</td>
+      <td>XML</td>
+      <td>★★☆☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>bspwm</td>
+      <td>Тайлинговый (BSP)</td>
+      <td>X11</td>
+      <td>Shell</td>
+      <td>★★★★☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>dwm</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>C (исходный код)</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Awesome</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>Lua</td>
+      <td>★★★★☆</td>
+      <td>★★★★☆</td>
+    </tr>
+    <tr>
+      <td>Xmonad</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>Haskell</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Qtile</td>
+      <td>Тайлинговый</td>
+      <td>X11/Wayland</td>
+      <td>Python</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+    </tr>
+    <tr>
+      <td>Herbstluftwm</td>
+      <td>Ручной тайлинг</td>
+      <td>X11</td>
+      <td>Shell</td>
+      <td>★★★★☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Hyprland</td>
+      <td>Тайлинговый</td>
+      <td>Wayland</td>
+      <td>Текст</td>
+      <td>★★★☆☆</td>
+      <td>★★★★☆</td>
+    </tr>
+    <tr>
+      <td>LeftWM</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>TOML</td>
+      <td>★★★☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Spectrwm</td>
+      <td>Тайлинговый</td>
+      <td>X11</td>
+      <td>Текст</td>
+      <td>★★☆☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Fluxbox</td>
+      <td>Stacking</td>
+      <td>X11</td>
+      <td>Текст</td>
+      <td>★★☆☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>IceWM</td>
+      <td>Stacking</td>
+      <td>X11</td>
+      <td>Текст</td>
+      <td>★☆☆☆☆</td>
+      <td>★★★★★</td>
+    </tr>
+    <tr>
+      <td>Enlightenment</td>
+      <td>Композитный</td>
+      <td>X11/Wayland</td>
+      <td>GUI</td>
+      <td>★★☆☆☆</td>
+      <td>★★★☆☆</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="de-footer-note">
+  <p>Статья подготовлена в ознакомительных целях. Версии и данные актуальны на начало 2026 года. Оконные менеджеры — это мощный инструмент для тех, кто хочет максимального контроля над своим рабочим пространством.</p>
+</div>
+    </template>
+
     <script src="data.js?v=8"></script>
     <script src="script.js?v=9"></script>
 </body>
