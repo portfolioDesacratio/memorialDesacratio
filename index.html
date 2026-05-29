@@ -11,7 +11,7 @@
     <meta name="author" content="CyberDesacratio">
     <meta name="robots" content="index, follow">
 
-    <!-- Никакого PWA/SW — чистый статический сайт -->
+    <!-- SW: минимальный, без кэширования, никогда не меняется -->
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" sizes="any">
@@ -369,5 +369,23 @@
 
     <script src="data.js?v=3"></script>
     <script src="script.js?v=3"></script>
+    <script>
+    // Минимальная регистрация стабильного SW (без кэширования)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(function(reg) {
+            console.log('[SW] registered');
+            reg.addEventListener('updatefound', function() {
+                var worker = reg.installing;
+                worker.addEventListener('statechange', function() {
+                    if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+                        console.log('[SW] updated');
+                    }
+                });
+            });
+        }).catch(function(err) {
+            console.log('[SW] error:', err);
+        });
+    }
+    </script>
 </body>
 </html>

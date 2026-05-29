@@ -1575,6 +1575,20 @@ body.light-mode .search-highlight {
     max-width: 100%;
     border-radius: 12px;
     margin: 16px 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.article-viewer .article-viewer-content .de-screenshot {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.article-viewer .article-viewer-content .de-screenshot:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
 }
 .article-viewer .article-viewer-content code {
     background: var(--code-bg);
