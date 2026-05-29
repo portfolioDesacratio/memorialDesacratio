@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- ⚡ ЯДЕРНЫЙ СБРОС: убить SW, очистить кэш, сбросить localStorage -->
+    <script>
+    (function(){
+        // 1. Убить все Service Workers
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+                regs.forEach(function(reg) { reg.unregister(); });
+            });
+        }
+        // 2. Очистить все CacheStorage
+        if (window.caches) {
+            caches.keys().then(function(names) {
+                names.forEach(function(name) { caches.delete(name); });
+            });
+        }
+        // 3. Сбросить localStorage сайта
+        localStorage.removeItem('mArticles');
+        localStorage.removeItem('mVersion');
+        localStorage.removeItem('mTheme');
+        localStorage.removeItem('mStaticArticles');
+        localStorage.removeItem('mFilter');
+        // 4. Установить новую версию
+        localStorage.setItem('mVersion', '5');
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)">
@@ -367,7 +392,7 @@
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
-    <script src="data.js?v=5"></script>
-    <script src="script.js?v=5"></script>
+    <script src="data.js?v=6"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>

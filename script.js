@@ -4,22 +4,13 @@
  * статьи, прогресс-бар, кнопка наверх, scroll reveal
  */
 
-// ========== УБИТЬ СТАРЫЙ SERVICE WORKER ==========
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.getRegistrations().then(function(regs) {
-        regs.forEach(function(reg) { reg.unregister(); });
-    });
-}
-
-// ========== МИГРАЦИЯ ВЕРСИИ (сброс старого кэша) ==========
+// ========== МИГРАЦИЯ ВЕРСИИ (дубль — на всякий случай) ==========
 (function() {
     const CURRENT_VERSION = 5;
     const savedVersion = parseInt(localStorage.getItem('mVersion'), 10);
     if (!savedVersion || savedVersion < CURRENT_VERSION) {
-        // При обновлении сайта — чистим старые данные
         localStorage.removeItem('mArticles');
         localStorage.removeItem('mTheme');
-        localStorage.removeItem('mAdminMode');
         localStorage.removeItem('mFilter');
         localStorage.removeItem('mStaticArticles');
         localStorage.setItem('mVersion', String(CURRENT_VERSION));
@@ -474,7 +465,7 @@ async function loadArticles() {
 
     // ВСЕГДА перезагружаем статью о DE (свежая версия)
     try {
-        const resp = await fetch('article-content.html?t=' + Date.now());
+        const resp = await fetch('article-content.html?v=6&t=' + Date.now());
         if (resp.ok) {
             const html = await resp.text();
             // Удаляем старую версию статьи, если есть
